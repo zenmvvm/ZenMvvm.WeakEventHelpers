@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.808.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{47DAD411-B8FF-4C08-AA6D-D5F3331A63FB}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		LICENSE = LICENSE
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZenMvvm.WeakEventHelpers", "src\ZenMvvm.WeakEventHelpers\ZenMvvm.WeakEventHelpers.csproj", "{3B140CA9-B0F1-4367-999D-63C59B3D72B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZenMvvm.WeakEventHelpers.Tests", "src\ZenMvvm.WeakEventHelpers.Tests\ZenMvvm.WeakEventHelpers.Tests.csproj", "{1D3ED48C-1A14-44A8-80AD-FCE02A260CAB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B140CA9-B0F1-4367-999D-63C59B3D72B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B140CA9-B0F1-4367-999D-63C59B3D72B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B140CA9-B0F1-4367-999D-63C59B3D72B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B140CA9-B0F1-4367-999D-63C59B3D72B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D3ED48C-1A14-44A8-80AD-FCE02A260CAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D3ED48C-1A14-44A8-80AD-FCE02A260CAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D3ED48C-1A14-44A8-80AD-FCE02A260CAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D3ED48C-1A14-44A8-80AD-FCE02A260CAB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {47D1AAA2-314D-428E-9016-B4F6A5AA4FDB}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<!-- General -->
+    <AssemblyName>ZenMvvm.WeakEventHelpers</AssemblyName>
+    <Description></Description>
+    <Copyright>Copyright 2020 Guy Antoine</Copyright>
+    <Authors>Guy Antoine and contributors</Authors>
+    <NeutralLanguage>en-GB</NeutralLanguage>
+
+    <!-- Build settings -->
+    <TargetFrameworks>netstandard2.0;net5.0</TargetFrameworks>
+
+    <!-- NuGet settings -->
+    <PackageId>ZenMvvm.WeakEventHelpers</PackageId>
+    <PackageTags>ZenMvvm.WeakEventHelpers</PackageTags> <!-- separate with ; -->
+    <PackageReleaseNotes>https://github.com/zenmvvm/ZenMvvm.WeakEventHelpers/releases</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/zenmvvm/ZenMvvm.WeakEventHelpers</PackageProjectUrl>
+    <!-- Choose either PackageLicenseExpression or PackageLicenseFile (but not both) -->
+    <!-- <PackageLicenseExpression>MIT</PackageLicenseExpression> -->
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/zenmvvm/ZenMvvm.WeakEventHelpers</RepositoryUrl>	  
+    <PackageIcon>icon@64x64.png</PackageIcon> <!-- See <ItemGroup> for path to file -->
+
+    <!-- SourceLink settings -->
+    <!-- Allows debugger to step into code of nuget package -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>  	
+    <IncludeSymbols>true</IncludeSymbols>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <None Include="../../art/icon@64x64.png" Pack="true" PackagePath="$(PackageIconUrl)" />
+    <None Include="../../LICENSE.md" Pack="true" PackagePath="" />
+  </ItemGroup>
+
+</Project>
