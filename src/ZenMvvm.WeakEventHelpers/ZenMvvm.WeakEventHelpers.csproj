@@ -32,8 +32,19 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <None Include="../../art/icon@64x64.png" Pack="true" PackagePath="$(PackageIconUrl)" />
-    <None Include="../../LICENSE.md" Pack="true" PackagePath="" />
+    <None Include="..\..\art\icon%4064x64.png">
+      <Pack>true</Pack>
+      <PackagePath>$(PackageIconUrl)</PackagePath>
+      <Link>package-items\icon%4064x64.png</Link>
+    </None>
+    <None Include="..\..\LICENSE.md">
+      <Pack>true</Pack>
+      <PackagePath></PackagePath>
+      <Link>package-items\LICENSE.md</Link>
+    </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="package-items\" />
+  </ItemGroup>
 </Project>
