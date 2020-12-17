@@ -3,8 +3,8 @@
   <PropertyGroup>
 	<!-- General -->
     <AssemblyName>ZenMvvm.WeakEventHelpers</AssemblyName>
-    <Description></Description>
-    <Copyright>Copyright 2020 Guy Antoine</Copyright>
+    <Description>Avoid memory leaks by using Weak Events. This package provides a Weak Event Manager to create weak events and a Weak Event Handler to weakly subscribe to standard events.</Description>
+    <Copyright>Copyright 2020 ZenMvvm</Copyright>
     <Authors>Guy Antoine and contributors</Authors>
     <NeutralLanguage>en-GB</NeutralLanguage>
 
@@ -13,7 +13,7 @@
 
     <!-- NuGet settings -->
     <PackageId>ZenMvvm.WeakEventHelpers</PackageId>
-    <PackageTags>ZenMvvm.WeakEventHelpers</PackageTags> <!-- separate with ; -->
+    <PackageTags>weak-event-helpers;weak-event-manager;weak-event-handler;events;zenmvvm</PackageTags> <!-- separate with ; -->
     <PackageReleaseNotes>https://github.com/zenmvvm/ZenMvvm.WeakEventHelpers/releases</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/zenmvvm/ZenMvvm.WeakEventHelpers</PackageProjectUrl>
     <!-- Choose either PackageLicenseExpression or PackageLicenseFile (but not both) -->
