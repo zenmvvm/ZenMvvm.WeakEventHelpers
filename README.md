@@ -1,166 +1,49 @@
-# ![Logo](art/ZenMvvm.WeakEventHelpers-64x64.png) ZenMvvm.WeakEventHelpers
-Description here
+# ![Logo](art/icon@64x64.png) ZenMvvm.WeakEventHelpers
+Avoid memory leaks by using Weak Events. This package provides a Weak Event Manager to create weak events and a Weak Event Handler to weakly subscribe to standard events.
 
 [![Coverage](https://raw.githubusercontent.com/zenmvvm/ZenMvvm.WeakEventHelpers/develop/coverage/badge_linecoverage.svg)](https://htmlpreview.github.io/?https://raw.githubusercontent.com/zenmvvm/ZenMvvm.WeakEventHelpers/develop/coverage/index.html) [![NuGet](https://buildstats.info/nuget/ZenMvvm.WeakEventHelpers?includePreReleases=false)](https://www.nuget.org/packages/ZenMvvm.WeakEventHelpers/)
 
+## WeakEvents
 
-A Template solution directory with:
+Listening for events can lead to memory leaks. The typical pattern for listening to an event, creates a strong reference from the event source to the event listener. The listener won't be garbage collected until the  event handler is explicitly removed. It is easy to forget to remove listeners, resulting in unintended memory leaks. Furthermore, in certain circumstances, you might want the object lifetime of the listener to be controlled by other factors, such as whether it currently belongs to the visual tree of the application, and not by the lifetime of the source.
 
-* .NET Standard 2.0 project, and
-  * Best for libraries. Everything uses this API. But no implementation so only good for libraries 
-* .NET 5 Unit Test project (implementation that now replaces  .NET Core 3.1 target framework)
-  * Have to have an implementation for a unit test runner. So .NET 5 is simple... and fully compatable with .NET Standard
+If you want to provide a weak event, use WeakEventManager. Listeners can then subscribe using the usual syntax `source.MyWeakEvent += OnSomeEvent;`
 
-## ToDo 
-
-* Add Test Helpers
-
-* update CI if new dependabot script more robust
-
-  * ```
-      dependabotautomerge:
-        # from https://localheinz.com/blog/2020/06/15/merging-pull-requests-with-github-actions/
-        needs: build
-        if: >
-          github.event_name == 'pull_request' &&
-          github.event.pull_request.draft == false && (
-            github.event.action == 'opened' ||
-            github.event.action == 'reopened' ||
-            github.event.action == 'synchronize'
-          ) && (
-          github.actor == 'dependabot[bot]'
-          )
-        runs-on: ubuntu-latest
-        steps:
-          - name: automerge
-            uses: actions/github-script@0.2.0
-            with:
-              script: |
-                const pullRequest = context.payload.pull_request
-                const repository = context.repo
-                await github.pulls.merge({
-                  merge_method: "merge",
-                  owner: repository.owner,
-                  pull_number: pullRequest.number,
-                  repo: repository.repo,
-                  })
-              github-token: ${{github.token}}
-    ```
-
-  * 
-
-## Steps:
-
-Download this repo as zip file
-
-Rename root folder name
-
-* Open GitKraken
-
-* Init
-  * Name project same
-  * Select root folder so that it over-rides / matches the existing folder
-  * Don't select gitignore or license as already there
-  * Should open with initial commit and bunch of unstaged changes
-* STAGE all but .github file workflows/main.yml
-  * this can't be pushed / updated to remote due to security concerns
-* Amend initial commit
-
-* Push
-  * Will ask you to create a remote... do so with your account
-
-***
-
-* Run rename-project.command
-  
-  * Will rename within files, filenames and directories
-  
-  * MacOS security gives issues
-  
-  * ```bash
-    sudo chmod 755 rename-project 
-    ls -l
-    # now should see x for execute
-    ./rename-project 
-    ```
-  
-* Review changes in version-history, and ammend intial commit
-* Force push to server
-
-***
-
-Ensure local and remote are synced (except for unstageed main.yml file)
-
-Login to github online and Create Github action
-
-* copy content from the local main.yml file into the action
-* commit file in git-online
-* delete local version
-* In GitKraken Pull remote from local
+If you want to consume a strong event with a weak reference, use WeakEventHandler: `source.SomeStrongEvent += new WeakEventHandler<EventArgs>(OnSomeEvent).Handler;`
 
 
+## WeakEventManager
 
-Initialise Gitflow and switch to develop branch
+Taken from [Xamarin.Forms.WeakEventManager](https://github.com/xamarin/Xamarin.Forms/blob/master/Xamarin.Forms.Core/WeakEventManager.cs) where Xamarin has kept the class private. WeakEventHelpers exposes this class publically so that you can use it in your own projects.
 
-## Command line option
+Creating events using the WeakEventManager, will ensure that they maintain a weak reference to their listeners:
 
-```bash
-# Download from Github
-curl --location --remote-name https://github.com/z33bs/ZenMvvm.WeakEventHelpers/archive/master.zip
-unzip master.zip
-git archive https://github.com/z33bs/ZenMvvm.WeakEventHelpers
-wget https://github.com/z33bs/ZenMvvm.WeakEventHelpers/archive/master.zip
+```c#
+readonly WeakEventManager _weakEventManager = new WeakEventManager();
 
-// Clone the repo
-git clone --depth=1 git://someserver/somerepo dirformynewrepo
-// Remove the .git directory
-rm -rf !$/.git
-
-git clone https://github.com/z33bs/ZenMvvm.WeakEventHelpers
-rm -rf .git
-
-# You can install xclip using `apt-get`
-apt-get install xclip
-xclip -sel c < file
+public event EventHandler CanExecuteChanged
+{
+    add => _weakEventManager.AddEventHandler(value);
+    remove => _weakEventManager.RemoveEventHandler(value);
+}
+public void RaiseCanExecuteChanged() => _weakEventManager.HandleEvent(this, EventArgs.Empty, nameof(CanExecuteChanged));
 
 ```
 
-### Works
+## WeakEventHandler
 
-```bash
-git clone https://github.com/z33bs/ZenMvvm.WeakEventHelpers NewName
-cd NewName
-rm -rf .git
-# do project renaming stuff
-rm rename-project
+From [Paul Stovell's Blog](http://paulstovell.com/blog/weakevents). Instead of subscribing to an event with your handler:
 
-git init
-git add .
-# git status
+```c#
+source.SomeStrongEvent += OnSomeEvent;
+```
 
-# create new branch main
-# will only be able to see when committed
-git checkout -b main
-# git branch -m main
-git commit -m 'Initial commit'
-git branch --list
+, wrap it in the WeakEventHandler:
 
-# create remote
-curl -u 'z33bs' https://api.github.com/user/repos -d '{"name":"NewName"}'
-
-git remote add origin https://github.com/z33bs/NewName
-git push -u origin master
-# Can only create worker afterward
-cat main.yml | pbcopy 
+```c#
+source.SomeStrongEvent += new WeakEventHandler<EventArgs>(OnSomeEvent).Handler;
 ```
 
 
-
-NET library template with continuous integration
-
-tests
-
-code coverage
-
-badges
+> :memo: Note that the WeakEventHandler wrapper won't be GC'ed, leaving a small "sacrifice" object alive in place of your listener. Not a complete solution, but a better alternative.
 
